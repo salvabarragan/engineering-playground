@@ -1,1 +1,3 @@
 instructions.md
+.env/
+.ruff_cache/
