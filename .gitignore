@@ -1,3 +1,5 @@
-instructions.md
 .env/
 .ruff_cache/
+.vscode/
+__pycache__/
+instructions.md
