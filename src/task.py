@@ -11,9 +11,11 @@ class Task:
 
         self.category = category
         self.is_done = False
+    
+    def complete_task(self):
+        self.is_done = True
 
     def __str__(self):
         return f"{self.name} ({self.category}) - {self.date.strftime('%d/%m/%Y')} ({
             'Done' if self.is_done else 'Undone'
         })"
-        
