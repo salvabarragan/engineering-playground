@@ -1,4 +1,4 @@
-from task import Task
+from .task import Task
 
 
 class TaskManager:
@@ -7,3 +7,9 @@ class TaskManager:
 
     def add_task(self, task: Task):
         self.tasks.append(task)
+
+    def remove_task(self, task: Task):
+        try:
+            self.tasks.remove(task)
+        except:
+            raise ValueError("The task is not in the list")
