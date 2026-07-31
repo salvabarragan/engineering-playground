@@ -27,5 +27,14 @@ class TestTask:
         task.complete_task()
         assert task.is_done is True
 
+    def test_modify_task(self, task):
+        task.modify_task(
+            new_name="Buy milk", new_date="31/12/2027", new_category="Food"
+        )
+        assert task.name == "Buy milk"
+        assert task.date == datetime.strptime("31/12/2027", "%d/%m/%Y")
+        assert task.category == "Food"
+        assert task.is_done is False
+
     def test_show_task(self, task):
         assert str(task) == "Study maths (School) - 01/01/2027 (Undone)"
