@@ -18,7 +18,7 @@ class TestTask:
     def test_invalid_date_task_creation(self):
         with pytest.raises(ValueError):
             Task(name="Study maths", date="32/01/2027", category="School")
-            
+
     def test_invalid_name_task_creation(self):
         with pytest.raises(ValueError):
             Task(name="", date="01/01/2027", category="School")
