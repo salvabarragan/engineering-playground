@@ -11,5 +11,19 @@ class TaskManager:
     def remove_task(self, task: Task):
         try:
             self.tasks.remove(task)
-        except:
+        except ValueError:
             raise ValueError("The task is not in the list")
+
+    def get_tasks(self, order: str | None = None) -> list[Task]:
+        """
+        Order can be: date, name. If it is empty, tasks are given in the order of creation.
+        """
+        if order == "date":
+            given_tasks = sorted(self.tasks, key=lambda x: x.date)
+        elif order == "name":
+            given_tasks = sorted(self.tasks, key=lambda x: x.name)
+        elif order is None:
+            given_tasks = self.tasks
+        else:
+            raise ValueError(f"'{order}' is not an option.")
+        return given_tasks
