@@ -10,7 +10,7 @@ def clear_screen():
 def create_task(task_manager):
     while True:
         clear_screen()
-        task_name = input("Task name: ")
+        task_name = input("Task name: ")  # TODO: If everthing is empty, go to menu.
         task_date = input("Task date: ")
         task_category = input("Task category (optional): ")
         try:
@@ -39,9 +39,38 @@ def view_tasks(task_manager):
         else:
             break
     clear_screen()
-    for task in tasks:
-        print(task)
-    input("Press any key to exit...")
+    print(tasks)
+    input("\nPress any key to exit...")
+
+
+def remove_task(task_manager):
+    while True:
+        clear_screen()
+
+        tasks = task_manager.get_tasks()
+
+        if task_manager.get_tasks():
+            print(task_manager)
+            selected_task = input(f"\nSelect a task by its number: ")
+            if selected_task:
+                try:
+                    index = int(selected_task) - 1
+                    if 0 <= index < len(tasks):
+                        task = tasks[index]
+                        task_manager.remove_task(task)
+                    else:
+                        raise ValueError("Task number is out of range.")
+                except (ValueError, IndexError) as e:
+                    print(f"Error: {e}")
+                    input("Press Enter to continue...")
+                else:
+                    break
+            else:
+                break
+        else:
+            print("There are no tasks.")
+            input("Press Enter to continue...")
+            break
 
 
 def main():
@@ -59,7 +88,7 @@ def main():
             case "2":
                 view_tasks(task_manager)
             case "3":
-                pass
+                remove_task(task_manager)
             case "4":
                 pass
             case "5":
