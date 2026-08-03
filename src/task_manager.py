@@ -18,12 +18,12 @@ class TaskManager:
         """
         Order can be: date, name. If it is empty, tasks are given in the order of creation.
         """
-        if order == "date":
+        if order is None:
+            given_tasks = self.tasks
+        elif order == "date":
             given_tasks = sorted(self.tasks, key=lambda x: x.date)
         elif order == "name":
             given_tasks = sorted(self.tasks, key=lambda x: x.name)
-        elif order is None:
-            given_tasks = self.tasks
         else:
             raise ValueError(f"'{order}' is not an option.")
         return given_tasks
