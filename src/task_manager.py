@@ -27,3 +27,6 @@ class TaskManager:
         else:
             raise ValueError(f"'{order}' is not an option.")
         return given_tasks
+
+    def __str__(self):
+        return "\n".join(f"{task}" for task in self.get_tasks())
