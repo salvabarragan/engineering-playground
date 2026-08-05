@@ -39,7 +39,8 @@ def view_tasks(task_manager):
         else:
             break
     clear_screen()
-    print(tasks)
+    for task in tasks:  # TODO: It could be improved
+        print(task)
     input("\nPress any key to exit...")
 
 
@@ -49,7 +50,7 @@ def remove_task(task_manager):
 
         tasks = task_manager.get_tasks()
 
-        if task_manager.get_tasks():
+        if tasks:
             print(task_manager)
             selected_task = input(f"\nSelect a task by its number: ")
             if selected_task:
@@ -65,6 +66,59 @@ def remove_task(task_manager):
                     input("Press Enter to continue...")
                 else:
                     break
+            else:
+                break
+        else:
+            print("There are no tasks.")
+            input("Press Enter to continue...")
+            break
+
+
+def modify_task(task_manager):
+    while True:
+        clear_screen()
+
+        tasks = task_manager.get_tasks()
+
+        if tasks:
+            print(task_manager)
+            selected_task = input(f"\nSelect a task by its number: ")
+            if selected_task:
+                try:
+                    index = int(selected_task) - 1
+                    if 0 <= index < len(tasks):
+                        task = tasks[index]
+                    else:
+                        raise ValueError("Task number is out of range.")
+                except (ValueError, IndexError) as e:
+                    print(f"Error: {e}")
+                    input("Press Enter to continue...")
+                else:
+                    clear_screen()
+                    print(task)
+                    new_name = input("\nNew name: ").strip()
+                    new_date = input("New date: ").strip()
+                    new_category = input("New category: ").strip()
+                    new_is_done = input("Is it done? (Y-N): ").strip().lower()
+                    try:
+                        if new_name:
+                            task.name = new_name
+                        if new_date:
+                            task.date = new_date
+                        if new_category:
+                            task.category = new_category
+                        if new_is_done:
+                            if new_is_done == "y":
+                                task.is_done = True
+                            elif new_is_done == "n":
+                                task.is_done = False
+
+                    except ValueError as e:
+                        clear_screen()
+                        print(f"Error: {e}")
+                        input("Press Enter to continue...")
+                    else:
+                        break
             else:
                 break
         else:
@@ -90,7 +144,7 @@ def main():
             case "3":
                 remove_task(task_manager)
             case "4":
-                pass
+                modify_task(task_manager)
             case "5":
                 break
             case _:
