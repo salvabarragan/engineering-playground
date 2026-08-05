@@ -24,7 +24,7 @@ def create_task(task_manager):
 
 
 def view_tasks(task_manager):
-    while True:  # TODO: In case it is empty, show that there are no tasks.
+    while True:
         clear_screen()
         order = input(
             "If you want to view them in an special order (date or name), type it: "
@@ -37,11 +37,14 @@ def view_tasks(task_manager):
             print(f"Error: {e}")
             input("Press Enter to continue...")
         else:
+            clear_screen()
+            if tasks:
+                for task in tasks:
+                    print(task)
+            else:
+                print("There are no tasks.")
+            input("\nPress any key to exit...")
             break
-    clear_screen()
-    for task in tasks:  # TODO: It could be improved
-        print(task)
-    input("\nPress any key to exit...")
 
 
 def remove_task(task_manager):
