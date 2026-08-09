@@ -104,18 +104,7 @@ def modify_task(task_manager):
                     new_category = input("New category: ").strip()
                     new_is_done = input("Is it done? (Y-N): ").strip().lower()
                     try:
-                        if new_name:
-                            task.name = new_name
-                        if new_date:
-                            task.date = new_date
-                        if new_category:
-                            task.category = new_category
-                        if new_is_done:
-                            if new_is_done == "y":
-                                task.is_done = True
-                            elif new_is_done == "n":
-                                task.is_done = False
-
+                        task.modify_task(new_name, new_date, new_category, new_is_done)
                     except ValueError as e:
                         clear_screen()
                         print(f"Error: {e}")
